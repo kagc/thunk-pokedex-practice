@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PokemonItems from './PokemonItems';
 import EditPokemonForm from './EditPokemonForm';
 import ItemForm from './ItemForm';
+import { getOnePokemon } from '../store/pokemon';
 
 const PokemonDetail = () => {
+const dispatch = useDispatch()
+
   const { pokemonId } = useParams();
+
   const pokemon = useSelector(state => state.pokemon[pokemonId]);
+// console.log(pokemon)
+
   const [showEditPokeForm, setShowEditPokeForm] = useState(false);
   const [editItemId, setEditItemId] = useState(null);
 
   useEffect(() => {
+    dispatch(getOnePokemon(pokemonId))
     setShowEditPokeForm(false);
     setEditItemId(null);
-  }, [pokemonId]);
+  }, [pokemonId, dispatch]);
+
 
   if (!pokemon || !pokemon.moves) {
     return null;
