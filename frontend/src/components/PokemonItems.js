@@ -6,17 +6,13 @@ import { deleteItem } from "../store/items";
 
 const PokemonItems = ({ pokemon, setEditItemId }) => {
   const { pokemonId } = useParams()
+  // const {id} = useParams()
   const dispatch = useDispatch()
 
   const items = useSelector((state) => {
     if (!pokemon.items) return null;
     return pokemon.items.map(itemId => state.items[itemId]);
   });
-
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    await dispatch(deleteItem())
-  }
 
   useEffect(() => {
     dispatch(getItemsFromPokemon(pokemonId))
@@ -47,7 +43,7 @@ const PokemonItems = ({ pokemon, setEditItemId }) => {
       )}
       {pokemon.captured && (
         <td className="centered">
-          <button onClick={handleDelete}>
+          <button onClick={()=> dispatch(deleteItem(pokemonId, item.id))}>
             Delete
           </button>
         </td>

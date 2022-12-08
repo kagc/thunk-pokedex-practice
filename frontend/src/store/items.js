@@ -49,8 +49,8 @@ export const editItem = (editedItem, itemId) => async dispatch => {
   }
 }
 
-export const deleteItem = (id) => async dispatch =>{
-  const response = await fetch(`/api/items/${id}`, {
+export const deleteItem = (pokemonId, itemId) => async dispatch =>{
+  const response = await fetch(`/api/items/${itemId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ export const deleteItem = (id) => async dispatch =>{
   });
     if(response.ok){
       const deletedItem = await response.json();
-      dispatch(remove(deletedItem))
+      dispatch(remove(itemId, pokemonId))
       return deletedItem
     }
 }
