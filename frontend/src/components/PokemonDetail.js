@@ -5,6 +5,7 @@ import PokemonItems from './PokemonItems';
 import EditPokemonForm from './EditPokemonForm';
 import ItemForm from './ItemForm';
 import { getOnePokemon } from '../store/pokemon';
+// import { createItem } from '../store/items';
 
 const PokemonDetail = () => {
 const dispatch = useDispatch()
@@ -75,7 +76,7 @@ const dispatch = useDispatch()
         <div>
           <h2>
             Items
-            <button> + </button>
+            <button onClick={()=>setEditItemId(true)}> + </button>
           </h2>
           <table>
             <thead>
